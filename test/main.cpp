@@ -1,6 +1,7 @@
 #include "entropy.hpp"
 #include <vector>
 
+///  function under test
 int times(int i, int j) { return i + j; }
 
 TEST("foo", [](entropy::context<void> const & ctxt) {
