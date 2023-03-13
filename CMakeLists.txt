@@ -6,10 +6,11 @@ project(entropy)
 
 # Add the header-only library
 file(GLOB HEADER_FILES "include/*.hpp")
+file(GLOB SRC_FILES "src/*.cpp")
 
 # Add the header files to your project
-add_library(entropy INTERFACE ${HEADER_FILES})
-target_include_directories(entropy INTERFACE include)
+add_library(entropy STATIC ${HEADER_FILES} ${SRC_FILES}) 
+target_include_directories(entropy PUBLIC include)
 
 # Add the executable to test the library
 add_executable(test_entropy test/main.cpp)
