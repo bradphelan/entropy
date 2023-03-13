@@ -87,6 +87,7 @@ namespace entropy {
 			return m_runtime;
 
 		}
+
 	};
 
 	template <typename T>
@@ -112,6 +113,11 @@ namespace entropy {
 	public:
 		context(results_ptr const& r, std::string const& name, runtime_ptr const& runtime) : context_base(r, name, runtime) {}
 
+		template <typename TF>
+		void scope(std::string name, TF fn) const {
+			context<void> ctxt = context(m_results, m_name + "." + name, m_runtime);
+			ctxt.context_base::scope([&] {fn(ctxt); });
+		}
 	};
 
 	context<void> create(int argv, char** argc);
